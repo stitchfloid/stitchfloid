@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido 💖</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="question">Quer namorar comigo? 💖</div>
+
+    <div id="options">
+        <button onclick="showCustomDialog('Eu te amo meu amor S2 💕')">Sim</button>
+        <button id="noBtn" onmouseover="moveButton()">Não</button>
+    </div>
+
+    <!-- Corações -->
+    <div class="hearts-container"></div>
+
+    <script>
+        function showCustomDialog(message) {
+
+            // ❌ some a frase
+            document.getElementById("question").style.display = "none";
+
+            var dialog = document.createElement('div');
+
+            dialog.style.position = 'fixed';
+            dialog.style.top = '50%';
+            dialog.style.left = '50%';
+            dialog.style.transform = 'translate(-50%, -50%)';
+            dialog.style.background = 'linear-gradient(135deg, #ff9a9e, #fad0c4)';
+            dialog.style.padding = '25px';
+            dialog.style.borderRadius = '20px';
+            dialog.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+            dialog.style.zIndex = '1000';
+            dialog.style.textAlign = 'center';
+
+            var content = document.createElement('p');
+            content.textContent = message;
+            content.style.color = '#fff';
+            content.style.fontSize = '18px';
+            content.style.fontWeight = 'bold';
+
+            dialog.appendChild(content);
+
+            var okButton = document.createElement('button');
+            okButton.textContent = 'OK';
+
+            okButton.style.marginTop = '15px';
+            okButton.style.padding = '10px 20px';
+            okButton.style.border = 'none';
+            okButton.style.borderRadius = '15px';
+            okButton.style.backgroundColor = '#ff4d6d';
+            okButton.style.color = '#fff';
+            okButton.style.cursor = 'pointer';
+            okButton.style.fontWeight = 'bold';
+
+            okButton.addEventListener('click', function() {
+                document.body.removeChild(dialog);
+            });
+
+            dialog.appendChild(okButton);
+            document.body.appendChild(dialog);
+        }
+
+        function moveButton() {
+            var noBtn = document.getElementById('noBtn');
+
+            var margin = 50;
+
+            noBtn.style.position = 'absolute';
+
+            noBtn.style.left = margin + Math.random() * (window.innerWidth - 2 * margin) + 'px';
+            noBtn.style.top = margin + Math.random() * (window.innerHeight - 2 * margin) + 'px';
+        }
+
+        // 💖 Corações subindo
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "💖";
+
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.fontSize = (20 + Math.random() * 30) + "px";
+
+            document.querySelector(".hearts-container").appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+
+</body>
+</html>
